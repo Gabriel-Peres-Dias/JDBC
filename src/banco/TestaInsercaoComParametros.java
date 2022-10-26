@@ -5,15 +5,18 @@ import java.sql.*;
 public class TestaInsercaoComParametros {
 
     public static void main(String[] args) throws SQLException {
-        String nome = "Ryzen 5 5600x";
-        String descricao = "Procesador AMD 6/12";
-
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.recuperarConexao();
+        connection.setAutoCommit(false);
 
         PreparedStatement stm =
                 connection.prepareStatement("INSERT INTO PRODUTO(nome, descricao) VALUES (?, ?)",
                         Statement.RETURN_GENERATED_KEYS);
+        adicionarVariavel("SmartTV", "45 Polegadas 144hz", stm);
+        adicionarVariavel("Garrafa", "Garrafa preta fosca ecológica", stm);
+    }
+
+    private static void adicionarVariavel(String nome, String descricao, PreparedStatement stm) throws SQLException {
         stm.setString(1, nome);
         stm.setString(2, descricao);
         stm.execute();
@@ -23,6 +26,7 @@ public class TestaInsercaoComParametros {
             Integer id = rst.getInt(1);
             System.out.println("ID: " + id);
         }
+        rst.close();
     }
 
 }
