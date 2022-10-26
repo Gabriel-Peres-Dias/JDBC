@@ -8,7 +8,6 @@ public class TestaConexao {
 
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.recuperarConexao();
-
         connection.close();
     }
 
