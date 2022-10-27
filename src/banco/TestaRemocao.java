@@ -7,12 +7,12 @@ import java.sql.SQLException;
 public class TestaRemocao {
     public static void main(String[] args) throws SQLException {
 
-        Integer id = 9;
+        Integer id = 15;
 
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.recuperarConexao();
 
-        PreparedStatement stm = connection.prepareStatement("DELETE FROM PRODUTO WHERE ID = ?");
+        PreparedStatement stm = connection.prepareStatement("DELETE FROM PRODUTO WHERE ID > ?");
         stm.setInt(1, id);
         stm.execute();
 
